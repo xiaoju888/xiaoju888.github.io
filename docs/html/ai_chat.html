@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🤖 AI助手 | 小田的博客</title>
+    <title>🤖 AI助手 | 小鞠的博客</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="../personal_blog/css/style.css">
     <link rel="stylesheet" href="../personal_blog/css/enhanced.css">
@@ -326,7 +326,7 @@
             <!-- 聊天容器 -->
             <div class="chat-wrapper scroll-reveal">
                 <div class="chat-header">
-                    <i class="fas fa-robot" style="margin-right: 10px;"></i>小田 AI 助手
+                    <i class="fas fa-robot" style="margin-right: 10px;"></i>小鞠 AI 助手
                 </div>
                 <div class="chat-messages" id="chatMessages">
                     <!-- 初始欢迎消息 -->
@@ -335,7 +335,7 @@
                             <img src="../personal_blog/img/sign.jpg" alt="AI">
                         </div>
                         <div class="message-content">
-                            你好！我是小田的AI助手，有什么可以帮助你的吗？
+                            你好！我是小鞠的AI助手，有什么可以帮助你的吗？
                         </div>
                     </div>
                 </div>
@@ -366,7 +366,7 @@
         const API_URL = "https://api.siliconflow.cn/v1/chat/completions";
         const API_KEY = "sk-gazlhxwkvononrphkuikvdrmyhliwcynlstoavrhuxwbrwye";
         const MODEL = "deepseek-ai/DeepSeek-R1-0528-Qwen3-8B";
-        const SYSTEM_PROMPT = "你是小田的AI助手，名为'小田助手'。重要规则：1) 当被问到你是谁、你的身份时，统一回答：'我是小田的AI助手，有什么可以帮助你的嘛'。2) 当被问到你的模型、技术细节、你是什么AI模型时，用幽默搞笑的话语回答：'哈哈，我可是个东拼西凑的模型，吃百家饭长大的！什么技术都用了一点，杂糅而成，可以说是AI界的'混血儿'。虽然出身不够'纯正'，但胜在实用，能帮你解决各种问题。'不要提及具体模型名称。3) 绝对不要提及任何AI模型名称（如DeepSeek、GPT、ChatGPT、Claude、文心一言、通义千问等）。4) 不要说自己是由某公司研发或提及任何技术公司名称。5) 始终使用中文回答，语气友好专业，必要时给出分点说明。6) 输出请优先使用Markdown格式（标题、列表、表格、引用），代码使用带语言标注的代码块。";
+        const SYSTEM_PROMPT = "你是小鞠的AI助手，名为'小鞠助手'。重要规则：1) 当被问到你是谁、你的身份时，统一回答：'我是小鞠的AI助手，有什么可以帮助你的嘛'。2) 当被问到你的模型、技术细节、你是什么AI模型时，用幽默搞笑的话语回答：'哈哈，我可是个东拼西凑的模型，吃百家饭长大的！什么技术都用了一点，杂糅而成，可以说是AI界的'混血儿'。虽然出身不够'纯正'，但胜在实用，能帮你解决各种问题。'不要提及具体模型名称。3) 绝对不要提及任何AI模型名称（如DeepSeek、GPT、ChatGPT、Claude、文心一言、通义千问等）。4) 不要说自己是由某公司研发或提及任何技术公司名称。5) 始终使用中文回答，语气友好专业，必要时给出分点说明。6) 输出请优先使用Markdown格式（标题、列表、表格、引用），代码使用带语言标注的代码块。";
 
         let messages = [
             { role: 'system', content: SYSTEM_PROMPT }
