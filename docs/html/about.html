@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>关于我 | 小田的博客</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <link rel="stylesheet" href="../personal_blog/css/style.css">
+    <link rel="stylesheet" href="../personal_blog/css/enhanced.css">
+    <link rel="icon" href="../personal_blog/img/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../personal_blog/img/favicon.ico" type="image/x-icon">
+    <style>
+        body.about-page .post-category {
+            position: static;
+            display: inline-block;
+            background: transparent;
+            color: var(--primary-color);
+            padding: 0;
+            border-radius: 0;
+            margin: 10px 0 6px;
+        }
+        body.about-page .post-info { position: static; }
+        
+        /* 科技感样式增强 */
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .tech-card {
+            padding: 20px;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            border-radius: 15px;
+            border-left: 4px solid #667eea;
+            transition: all 0.3s ease;
+        }
+        
+        .tech-card:hover {
+            transform: translateX(10px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.2);
+        }
+        
+        .tech-card i {
+            font-size: 2em;
+            color: #667eea;
+            margin-bottom: 10px;
+            display: block;
+        }
+        
+        .tech-card h4 {
+            color: #2c3e50;
+            margin-bottom: 8px;
+            font-size: 1.1em;
+        }
+        
+        .tech-card p {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            line-height: 1.6;
+        }
+        
+        @media (max-width: 768px) {
+            .tech-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* 针对 about 页面单栏布局调整 */
+        body.about-page .main-container {
+            display: block; 
+            max-width: 1000px; /* 限制内容最大宽度，阅读体验更好 */
+        }
+        body.about-page .content {
+            max-width: 100%;
+            padding: 0;
+        }
+    </style>
+</head>
+<body class="about-page">
+    <div id="navbar-mount"></div>
+
+    <div class="main-container">
+        <!-- 原侧边栏已移除，整合到主要内容区 -->
+
+        <main class="content">
+            <div class="about-hero animate-fade-in-down">
+                <div class="about-hero-img">
+                    <img src="../personal_blog/img/sign.jpg" alt="小田">
+                </div>
+                <div class="about-hero-content">
+                    <h2>小田</h2>
+                    <!-- <p class="profile-title">全栈开发者 & 技术博主</p> -->
+                    <p class="profile-bio">热爱编程，喜欢分享技术与生活，聚焦 Web 与 AI。致力于构建优雅、高效的数字产品。</p>
+                    <div class="social-links">
+                        <a href="https://github.com/Tianmaozheng" target="_blank" class="social-icon social-icon-enhanced" title="GitHub"><i class="fab fa-github"></i></a>
+                        <a href="mailto:2151447128@qq.com" class="social-icon social-icon-enhanced" title="邮箱"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <section class="recent-posts">
+                <h2 class="section-title scroll-reveal">关于我</h2>
+                <article class="post-card enhanced-card scroll-reveal">
+                    <div class="post-info" style="width:100%">
+                        <div class="post-category">👋 简介</div>
+                        <h3>你好，我是小田</h3>
+                        <p style="font-size: 1.05em; line-height: 1.8; color: #555;">
+                            我是一名全栈开发者与技术博主，专注 <strong>Python</strong>、<strong>前端工程化</strong>、<strong>数据分析</strong>与 <strong>AI 应用</strong>。
+                            这里将分享我的项目、学习路径与实践心得。
+                        </p>
+                        
+                        <div class="post-category" style="margin-top:25px;">💡 技能专长</div>
+                        <div class="tech-grid">
+                            <div class="tech-card scroll-reveal delay-100">
+                                <i class="fas fa-server"></i>
+                                <h4>后端开发</h4>
+                                <p>Python / FastAPI / Flask</p>
+                            </div>
+                            <div class="tech-card scroll-reveal delay-200">
+                                <i class="fas fa-laptop-code"></i>
+                                <h4>前端开发</h4>
+                                <p>HTML/CSS/JavaScript / React</p>
+                            </div>
+                            <div class="tech-card scroll-reveal delay-300">
+                                <i class="fas fa-database"></i>
+                                <h4>数据分析</h4>
+                                <p>Pandas / NumPy / 可视化</p>
+                            </div>
+                            <div class="tech-card scroll-reveal delay-400">
+                                <i class="fas fa-brain"></i>
+                                <h4>机器学习</h4>
+                                <p>深度学习 / NLP / CV</p>
+                            </div>
+                        </div>
+                        
+                        <p style="margin-top:25px; font-size: 1.05em; line-height: 1.8; color: #555;">
+                            如果你对我的内容感兴趣，欢迎通过 <a href="https://github.com/Tianmaozheng" target="_blank" style="color: #667eea; font-weight: 600;">GitHub</a> 与我交流。
+                        </p>
+                    </div>
+                </article>
+            </section>
+        </main>
+    </div>
+
+    <div id="footer-mount"></div>
+
+    <a href="#" class="back-to-top"><i class="fas fa-arrow-up"></i></a>
+    <script src="../personal_blog/js/script.js"></script>
+    <script src="../personal_blog/js/enhanced.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,427 @@
+/* ============================================
+   高级动画和交互效果增强样式
+   ============================================ */
+
+/* 统一主题色变量 */
+:root {
+    --theme-primary: #667eea;
+    --theme-secondary: #764ba2;
+    --theme-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --theme-gradient-hover: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+    --theme-light: rgba(102, 126, 234, 0.1);
+    --theme-shadow: rgba(102, 126, 234, 0.3);
+    --theme-shadow-hover: rgba(102, 126, 234, 0.5);
+}
+
+/* 强制显示垂直滚动条，防止页面切换抖动 */
+html {
+    overflow-y: scroll;
+}
+
+/* 页面加载动画 */
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes gradientShift {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* 通用动画类 */
+.animate-fade-in-down {
+    animation: fadeInDown 0.8s ease-out;
+}
+
+.animate-fade-in-up {
+    animation: fadeInUp 0.8s ease-out;
+}
+
+.animate-fade-in-left {
+    animation: fadeInLeft 0.8s ease-out;
+}
+
+.animate-fade-in-right {
+    animation: fadeInRight 0.8s ease-out;
+}
+
+.animate-scale-in {
+    animation: scaleIn 0.6s ease-out;
+}
+
+.animate-float {
+    animation: float 3s ease-in-out infinite;
+}
+
+/* 延迟动画 */
+.delay-100 { animation-delay: 0.1s; }
+.delay-200 { animation-delay: 0.2s; }
+.delay-300 { animation-delay: 0.3s; }
+.delay-400 { animation-delay: 0.4s; }
+.delay-500 { animation-delay: 0.5s; }
+.delay-600 { animation-delay: 0.6s; }
+
+/* 滚动触发动画 */
+.scroll-reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.scroll-reveal.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* 高级卡片效果 */
+.enhanced-card {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.enhanced-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.3),
+        transparent
+    );
+    transition: left 0.5s ease;
+}
+
+.enhanced-card:hover::before {
+    left: 100%;
+}
+
+.enhanced-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* 关于页-横向个人简介卡片 (新) */
+.about-hero {
+    display: flex;
+    align-items: center;
+    background: white;
+    border-radius: 20px;
+    padding: 40px;
+    margin-bottom: 40px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.8);
+    backdrop-filter: blur(10px);
+}
+
+/* 装饰背景 */
+.about-hero::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -10%;
+    width: 60%;
+    height: 200%;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.08) 100%);
+    transform: rotate(-15deg);
+    z-index: 0;
+    pointer-events: none;
+}
+
+.about-hero-img {
+    flex: 0 0 180px;
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 5px solid #fff;
+    box-shadow: 0 10px 25px rgba(102, 126, 234, 0.25);
+    margin-right: 40px;
+    z-index: 1;
+    transition: transform 0.4s ease;
+}
+
+.about-hero-img:hover {
+    transform: scale(1.05) rotate(3deg);
+}
+
+.about-hero-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.about-hero-content {
+    flex: 1;
+    z-index: 1;
+}
+
+.about-hero h2 {
+    font-size: 2.2rem;
+    color: #2c3e50;
+    margin-bottom: 10px;
+    font-weight: 700;
+    background: var(--theme-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+}
+
+.about-hero .profile-title {
+    font-size: 1.2rem;
+    color: #7f8c8d;
+    margin-bottom: 15px;
+    font-weight: 500;
+    background: rgba(102, 126, 234, 0.1);
+    display: inline-block;
+    padding: 5px 15px;
+    border-radius: 20px;
+    color: var(--theme-primary);
+}
+
+.about-hero .profile-bio {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: #555;
+    margin-bottom: 25px;
+    max-width: 90%;
+}
+
+.about-hero .social-links {
+    justify-content: flex-start; /* 左对齐 */
+}
+
+/* 移动端适配 */
+@media (max-width: 768px) {
+    .about-hero {
+        flex-direction: column;
+        text-align: center;
+        padding: 30px 20px;
+    }
+    
+    .about-hero-img {
+        margin-right: 0;
+        margin-bottom: 25px;
+        width: 150px;
+        height: 150px;
+    }
+    
+    .about-hero .social-links {
+        justify-content: center;
+    }
+    
+    .about-hero .profile-bio {
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+/* 个人资料卡片增强 (旧样式保留以防万一，但不再使用) */
+.profile-card-enhanced {
+    position: relative;
+    background: white;
+    border-radius: 20px;
+    padding: 35px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.profile-image-enhanced {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    margin: 0 auto 25px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 5px solid #f8f9fa;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    transition: all 0.4s ease;
+}
+
+.profile-image-enhanced:hover {
+    transform: scale(1.1) rotate(5deg);
+    box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
+}
+
+.profile-image-enhanced img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* 社交图标增强 */
+.social-icon-enhanced {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 45px;
+    height: 45px;
+    margin: 0 8px;
+    border-radius: 50%;
+    background: var(--theme-gradient);
+    color: white;
+    font-size: 1.2em;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 15px var(--theme-shadow);
+}
+
+.social-icon-enhanced:hover {
+    transform: translateY(-5px) rotate(360deg);
+    box-shadow: 0 8px 25px var(--theme-shadow-hover);
+}
+
+/* 按钮增强效果 */
+.btn-enhanced {
+    position: relative;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 50px;
+    background: var(--theme-gradient);
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px var(--theme-shadow);
+}
+
+.btn-enhanced:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px var(--theme-shadow-hover);
+}
+
+/* 技能列表增强 */
+.skill-item {
+    position: relative;
+    padding: 15px;
+    margin: 10px 0;
+    background: var(--theme-gradient);
+    border-radius: 12px;
+    color: white;
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.skill-item:hover {
+    transform: translateX(10px) scale(1.05);
+    box-shadow: 0 10px 25px var(--theme-shadow);
+}
+
+.skill-item i {
+    color: white;
+    margin-right: 12px;
+    font-size: 1.2em;
+}
+
+/* 自定义滚动条 */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--theme-gradient);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--theme-gradient-hover);
+}
+
+/* 响应式优化 */
+@media (max-width: 768px) {
+    .enhanced-card:hover {
+        transform: translateY(-5px);
+    }
+    
+    .profile-image-enhanced:hover {
+        transform: scale(1.05) rotate(2deg);
+    }
+}
+
+/* 平滑滚动 */
+html {
+    scroll-behavior: smooth;
+}
+
+/* 选择文本样式 */
+::selection {
+    background: var(--theme-light);
+    color: #2c3e50;
+}

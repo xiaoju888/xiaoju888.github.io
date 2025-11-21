@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>留言板 | 小田的博客</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="../personal_blog/css/style.css">
+    <link rel="stylesheet" href="../personal_blog/css/enhanced.css">
+    <link rel="icon" href="../personal_blog/img/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../personal_blog/img/favicon.ico" type="image/x-icon">
+    <style>
+        body.guestbook-page .main-container { justify-content:center; }
+        
+        /* 留言板专属科技感样式 */
+        .guestbook-hero {
+            text-align: center;
+            padding: 60px 30px;
+            margin-bottom: 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 24px;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(102, 126, 234, 0.3);
+            max-width: 720px; /* 限制最大宽度 */
+            margin-left: auto; /* 居中 */
+            margin-right: auto; /* 居中 */
+        }
+        
+        .guestbook-hero::before {
+            content: '💬';
+            position: absolute;
+            top: -30px;
+            right: -30px;
+            font-size: 12em;
+            opacity: 0.1;
+            transform: rotate(-15deg);
+        }
+        
+        .guestbook-hero h1 {
+            font-size: 2.8em;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+        
+        .guestbook-hero p {
+            font-size: 1.3em;
+            opacity: 0.95;
+            position: relative;
+        }
+        
+        .guestbook-card { 
+            background:#fff; 
+            border-radius:24px; 
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1); 
+            padding:40px; 
+            max-width:720px; 
+            margin:0 auto;
+            transition: all 0.3s ease;
+        }
+        
+        .guestbook-card:hover {
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.15);
+        }
+        
+        .guestbook-form { 
+            display:flex; 
+            flex-direction:column; 
+            gap:20px; 
+            margin-top:10px; 
+        }
+        
+        .form-group {
+            position: relative;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            color: #2c3e50;
+            font-weight: 600;
+            font-size: 1em;
+        }
+        
+        .form-group label i {
+            color: #667eea;
+            margin-right: 10px;
+        }
+        
+        .guestbook-form input, 
+        .guestbook-form textarea { 
+            width:100%; 
+            padding:14px 18px; 
+            border:2px solid #e5e7eb; 
+            border-radius:12px; 
+            background:#fff;
+            font-size: 1em;
+            transition: all 0.3s ease;
+        }
+        
+        .guestbook-form input:focus,
+        .guestbook-form textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+        }
+        
+        .guestbook-form textarea { 
+            resize: vertical; 
+            min-height: 130px;
+            font-family: inherit;
+        }
+        
+        .guestbook-actions { 
+            display:flex; 
+            justify-content:center; 
+            margin-top:10px; 
+        }
+        
+        .guestbook-form button { 
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color:#fff; 
+            border:none; 
+            padding:14px 40px; 
+            border-radius:50px; 
+            cursor:pointer; 
+            min-width:170px;
+            font-size: 1.1em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+        
+        .guestbook-form button:hover { 
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.5);
+        }
+        
+        .guestbook-form button:active {
+            transform: translateY(0);
+        }
+        
+        .guestbook-divider { 
+            height:2px; 
+            background: linear-gradient(90deg, transparent, #e5e7eb, transparent); 
+            margin:30px 0; 
+            border-radius:2px; 
+        }
+        
+        .info-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .info-card {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            padding: 25px;
+            border-radius: 16px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.2);
+        }
+        
+        .info-card i {
+            font-size: 2.5em;
+            color: #667eea;
+            margin-bottom: 15px;
+            display: block;
+        }
+        
+        .info-card h3 {
+            color: #2c3e50;
+            margin-bottom: 8px;
+            font-size: 1.2em;
+        }
+        
+        .info-card p {
+            color: #7f8c8d;
+            font-size: 0.95em;
+        }
+        
+        .success-message {
+            display: none;
+            background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 16px;
+            margin-bottom: 30px;
+            text-align: center;
+            animation: slideInUp 0.5s ease;
+        }
+        
+        .success-message.show {
+            display: block;
+        }
+        
+        .success-message i {
+            font-size: 3.5em;
+            margin-bottom: 15px;
+            display: block;
+        }
+        
+        .success-message h2 {
+            margin: 0 0 10px 0;
+        }
+        
+        @media (max-width: 768px) {
+            .guestbook-card {
+                padding: 25px;
+            }
+            
+            .guestbook-hero h1 {
+                font-size: 2em;
+            }
+            
+            .info-cards {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body class="guestbook-page">
+    <div id="navbar-mount"></div>
+
+    <div class="main-container">
+        <main class="content" style="max-width: 100%;">
+            <section class="recent-posts">
+                <!-- 页面Hero区域 -->
+                <div class="guestbook-hero scroll-reveal animate-scale-in">
+                    <h1>💬 留言板</h1>
+                    <p>欢迎留下你的足迹，分享你的想法与建议</p>
+                </div>
+
+                <!-- 成功消息 -->
+                <div class="success-message" id="successMessage">
+                    <i class="fas fa-check-circle"></i>
+                    <h2>感谢你的留言！</h2>
+                    <p>我已收到邮件通知，会尽快查看并回复。</p>
+                </div>
+
+                <!-- 留言表单 -->
+                <div class="guestbook-card scroll-reveal">
+                    <form class="guestbook-form" action="https://formsubmit.co/2151447128@qq.com" method="POST" id="guestbookForm">
+                        <input type="hidden" name="_subject" value="【博客留言】来自留言板的新消息">
+                        <input type="hidden" name="_template" value="table">
+                        <input type="hidden" name="_captcha" value="false">
+                        <input type="hidden" name="_next" id="nextUrl" value="">
+
+                        <div class="form-group">
+                            <label for="name">
+                                <i class="fas fa-user"></i>您的称呼
+                            </label>
+                            <input 
+                                type="text" 
+                                id="name" 
+                                name="name" 
+                                placeholder="请输入您的昵称" 
+                                required
+                                maxlength="50"
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">
+                                <i class="fas fa-envelope"></i>电子邮箱 <span style="color: #7f8c8d; font-weight: normal;">(选填)</span>
+                            </label>
+                            <input 
+                                type="email" 
+                                id="email" 
+                                name="email" 
+                                placeholder="your@email.com"
+                                maxlength="100"
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message">
+                                <i class="fas fa-comment-dots"></i>留言内容
+                            </label>
+                            <textarea 
+                                id="message" 
+                                name="message" 
+                                placeholder="分享你的想法、建议或问题..." 
+                                required
+                                maxlength="500"
+                                rows="6"
+                            ></textarea>
+                            <div style="text-align: right; color: #7f8c8d; font-size: 0.9em; margin-top: 8px;">
+                                <span id="charCount">0</span>/500
+                            </div>
+                        </div>
+
+                        <div class="guestbook-actions">
+                            <button type="submit" class="btn-enhanced">
+                                <i class="fas fa-paper-plane" style="margin-right: 8px;"></i>
+                                发送留言
+                            </button>
+                        </div>
+                    </form>
+
+                    <div class="guestbook-divider"></div>
+
+                    <!-- 信息卡片 -->
+                    <div class="info-cards">
+                        <div class="info-card scroll-reveal delay-100">
+                            <i class="fas fa-clock"></i>
+                            <h3>快速回复</h3>
+                            <p>24小时内查看</p>
+                        </div>
+                        <div class="info-card scroll-reveal delay-200">
+                            <i class="fas fa-shield-alt"></i>
+                            <h3>隐私保护</h3>
+                            <p>信息安全保密</p>
+                        </div>
+                        <div class="info-card scroll-reveal delay-300">
+                            <i class="fas fa-comments"></i>
+                            <h3>开放交流</h3>
+                            <p>欢迎各类建议</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <div id="footer-mount"></div>
+
+    <a href="#" class="back-to-top"><i class="fas fa-arrow-up"></i></a>
+    <script src="../personal_blog/js/script.js"></script>
+    <script src="../personal_blog/js/enhanced.js"></script>
+    <script>
+    (function() {
+        // 字符计数
+        const messageTextarea = document.getElementById('message');
+        const charCount = document.getElementById('charCount');
+        
+        if (messageTextarea && charCount) {
+            messageTextarea.addEventListener('input', function() {
+                const count = this.value.length;
+                charCount.textContent = count;
+                
+                if (count > 450) {
+                    charCount.style.color = '#e74c3c';
+                } else if (count > 400) {
+                    charCount.style.color = '#f39c12';
+                } else {
+                    charCount.style.color = '#7f8c8d';
+                }
+            });
+        }
+        
+        // 检查成功参数
+        try {
+            const params = new URLSearchParams(window.location.search);
+            if (params.get('success') === '1') {
+                const successMessage = document.getElementById('successMessage');
+                if (successMessage) {
+                    successMessage.classList.add('show');
+                    
+                    // 3秒后隐藏
+                    setTimeout(() => {
+                        successMessage.style.opacity = '0';
+                        setTimeout(() => {
+                            successMessage.classList.remove('show');
+                            successMessage.style.opacity = '1';
+                        }, 300);
+                    }, 3000);
+                }
+                
+                // 清理URL
+                const url = new URL(window.location);
+                url.searchParams.delete('success');
+                window.history.replaceState({}, '', url);
+            }
+        } catch (e) {
+            console.error('检查成功参数失败:', e);
+        }
+        
+        // 设置表单提交后的跳转URL
+        try {
+            const form = document.getElementById('guestbookForm');
+            const nextInput = document.getElementById('nextUrl');
+            
+            if (form && nextInput) {
+                // 构建完整的跳转URL
+                const baseUrl = window.location.origin + window.location.pathname;
+                nextInput.value = baseUrl + '?success=1';
+                
+                form.addEventListener('submit', function(e) {
+                    // 显示提交动画
+                    const submitBtn = form.querySelector('button[type="submit"]');
+                    if (submitBtn) {
+                        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin" style="margin-right: 8px;"></i>发送中...';
+                        submitBtn.disabled = true;
+                    }
+                });
+            }
+        } catch (e) {
+            console.error('设置表单失败:', e);
+        }
+        
+        // 表单验证增强
+        const nameInput = document.getElementById('name');
+        const emailInput = document.getElementById('email');
+        
+        if (nameInput) {
+            nameInput.addEventListener('blur', function() {
+                if (this.value.trim().length < 2) {
+                    this.style.borderColor = '#e74c3c';
+                } else {
+                    this.style.borderColor = '#2ecc71';
+                }
+            });
+            
+            nameInput.addEventListener('focus', function() {
+                this.style.borderColor = '#667eea';
+            });
+        }
+        
+        if (emailInput) {
+            emailInput.addEventListener('blur', function() {
+                if (this.value && !this.checkValidity()) {
+                    this.style.borderColor = '#e74c3c';
+                } else if (this.value) {
+                    this.style.borderColor = '#2ecc71';
+                }
+            });
+            
+            emailInput.addEventListener('focus', function() {
+                this.style.borderColor = '#667eea';
+            });
+        }
+        
+        if (messageTextarea) {
+            messageTextarea.addEventListener('blur', function() {
+                if (this.value.trim().length < 10) {
+                    this.style.borderColor = '#e74c3c';
+                } else {
+                    this.style.borderColor = '#2ecc71';
+                }
+            });
+            
+            messageTextarea.addEventListener('focus', function() {
+                this.style.borderColor = '#667eea';
+            });
+        }
+    })();
+    </script>
+</body>
+</html>
